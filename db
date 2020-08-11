@@ -1,0 +1,184 @@
+//1.系統先選條碼號並點空格
+//2.點Excel(Google Sheets)視窗
+//3.點按鍵精靈視窗後開始
+
+//切換至Excel視窗
+KeyDown 18, 1
+KeyPress 9, 1
+KeyUp 18, 1
+Delay 500
+
+//複製條碼號
+KeyDown 17, 1
+KeyPress 67, 1
+KeyUp 17, 1
+Delay 500
+
+//切換至系統視窗
+KeyDown 18, 1
+KeyPress 9, 2
+KeyUp 18, 1
+Delay 500
+
+//標記避免切換次數不同
+Rem Afer_Initial
+
+
+//貼上條碼號
+KeyDown 17, 1
+KeyPress 86, 1
+KeyUp 17, 1
+Delay 500
+
+//查詢
+KeyPress "Enter", 1
+Delay 3000
+
+//判斷別館有無館藏
+FindPic 200,300,500,500,"C:\Users\Jiaosi-900\Documents\查別館有無館藏.bmp",0.7,intXL,intYL
+If  intXL < 0 And intYL < 0 Then
+Goto Find_Book
+Else
+
+//若無，跳至找書本列
+//若有，移至圖書館別
+
+Delay 500
+
+KeyPress "Tab", 1
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+
+//選礁溪
+KeyPress "0", 1
+KeyPress "5", 1
+Delay 500
+KeyPress "Enter", 1
+Delay 1500
+End If
+
+//找本書列
+Rem Find_Book
+
+FindColor 589,445,671,565,"FDF8F5",intXM,intYM
+If intXM > 0 And intYM > 0 Then
+End If
+Delay 500
+
+MoveTo intXM, intYM
+Delay 500
+LeftClick 1
+Delay 500
+KeyPress "1", 1
+KeyPress "0", 2
+Delay 500
+KeyPress "Enter", 1
+Delay 2000
+
+KeyDown 17, 1
+KeyPress 70, 1
+KeyUp 17, 1
+Delay 500
+KeyDown 17, 1
+KeyPress 86, 1
+KeyUp 17, 1
+Delay 500
+KeyPress "Tab", 3
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+
+//抓藍色白底或綠底、抓黃色
+FindColor 0, 0, 1440, 900, "FF9033", intX, intY
+
+If intX < 1 AND intY < 1 Then
+FindColor 0, 0, 1440, 900, "F98D2F", intX, intY
+Else
+End If
+
+If intX > 0 And intY > 0 Then
+End If
+
+Delay 500
+
+FindColor intX,intY,1440,900,"00C8F8",intXC,intYC
+If intXC > 0 And intYC > 0 Then
+End If
+Delay 500
+
+//點修改該書
+MoveTo intXC, intYC
+Delay 500
+LeftClick 1
+Delay 2000
+
+//狀態改待報廢
+KeyPress "Tab", 24
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+KeyPress "T", 1
+KeyPress "5", 1
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+KeyPress "Tab", 1
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+
+//按確定
+KeyPress "Enter", 1
+Delay 500
+
+//回查詢
+KeyDown 17, 1
+KeyPress 70, 1
+KeyUp 17, 1
+Delay 500
+SayString "回查詢"
+Delay 500
+KeyPress "Tab", 3
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+KeyPress "Enter", 1
+Delay 3000
+
+//選條碼號
+KeyDown 16, 1
+KeyPress 9, 1
+KeyUp 16, 1
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+KeyPress "Down", 9
+Delay 500
+KeyPress "Enter", 1
+Delay 500
+KeyPress "Tab", 1
+Delay 500
+
+//切換至Excel視窗
+KeyDown 18, 1
+KeyPress 9, 1
+KeyUp 18, 1
+Delay 500
+
+//複製下一個條碼
+KeyPress "Down", 1
+Delay 500
+KeyDown 17, 1
+KeyPress 67, 1
+KeyUp 17, 1
+Delay 500
+
+//切換至系統
+KeyDown 18, 1
+KeyPress 9, 1
+KeyUp 18, 1
+Delay 500
+
+//跳回標記
+Goto Afer_Initial
